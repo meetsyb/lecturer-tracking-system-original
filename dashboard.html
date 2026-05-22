@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLASU Attendance Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .portal-card {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s ease;
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        .portal-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.2);
+        }
+        .portal-card i {
+            font-size: 48px;
+            color: #FFD700;
+            margin-bottom: 18px;
+            display: block;
+        }
+        .portal-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        .portal-card p {
+            font-size: 14px;
+            color: #ddd;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .portal-card .btn {
+            display: inline-block;
+            padding: 11px 28px;
+            background: #006B3C;
+            color: white;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .portal-card:hover .btn {
+            background: #004F2C;
+        }
+        .page-title {
+            text-align: center;
+            padding: 40px 20px 10px;
+            color: #FFD700;
+        }
+        .page-title h1 { font-size: 36px; margin-bottom: 10px; }
+        .page-title p  { font-size: 16px; color: #ddd; }
+        .navbar {
+            width: 100%;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-section { display: flex; align-items: center; gap: 12px; }
+        .logo-section img { width: 50px; height: 50px; border-radius: 50%; background: white; padding: 4px; object-fit: contain; }
+        .logo-section h2 { color: #FFD700; }
+        #themeToggle { width: 46px; height: 46px; border: none; border-radius: 50%; background: #FFD700; color: #006B3C; font-size: 18px; cursor: pointer; }
+        @media(max-width: 600px) {
+            .page-title h1 { font-size: 26px; }
+            .navbar { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo-section">
+            <img src="assets/images/logo.png" alt="PLASU Logo">
+            <h2>PLASU-AT</h2>
+        </div>
+        <button id="themeToggle">🌙</button>
+    </nav>
+
+    <!-- TITLE -->
+    <div class="page-title">
+        <h1>Attendance Tracker Portal</h1>
+        <p>Select your portal to continue</p>
+    </div>
+
+    <!-- PORTAL CARDS -->
+    <div class="portal-grid">
+
+        <!-- LECTURER -->
+        <a href="lecturer/lecturer-login.html" class="portal-card">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <h3>Lecturer</h3>
+            <p>Manage lectures, start sessions and track student attendance via OTP.</p>
+            <span class="btn">Enter Portal</span>
+        </a>
+
+        <!-- STUDENT -->
+        <a href="student/student-login.html" class="portal-card">
+            <i class="fa-solid fa-user-graduate"></i>
+            <h3>Student</h3>
+            <p>Verify attendance with OTP code and view your attendance history.</p>
+            <span class="btn">Enter Portal</span>
+        </a>
+
+        <!-- ADMIN -->
+        <a href="admin-login.html" class="portal-card">
+            <i class="fa-solid fa-user-shield"></i>
+            <h3>Admin</h3>
+            <p>Manage staff, courses, venues and send announcements.</p>
+            <span class="btn">Enter Portal</span>
+        </a>
+
+        <!-- SCHOOL -->
+        <a href="school/school-dashboard.html" class="portal-card">
+            <i class="fa-solid fa-building-columns"></i>
+            <h3>School</h3>
+            <p>Monitor university-wide attendance analytics and reports.</p>
+            <span class="btn">View Dashboard</span>
+        </a>
+
+    </div>
+
+    <script src="js/theme.js"></script>
+
+</body>
+</html>

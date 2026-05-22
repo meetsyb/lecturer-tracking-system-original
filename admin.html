@@ -1,0 +1,82 @@
+<!-- ================= admin.html ================= -->
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+   <!-- 🔐 LOGIN PROTECTION -->
+<script>
+const user = localStorage.getItem("user");
+if (!user) {
+  window.location.href = "login.html";
+}
+</script>
+<div class="container">  <div class="sidebar">
+    <div class="logo">
+    <img src="img/logo.png" alt="Logo">
+    <h2>PLASU</h2>
+    </div>
+    <ul>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="schedule.html">Schedule Lectures</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="attendance.html">Student Attendance</a></li>
+      <li><a href="reports.html">Reports</a></li>
+      <li><a href="admin.html">Admin Panel</a></li>
+      <li><a class="logout-btn" onclick="logout()">Logout</a></li>
+<script>
+function logout() {
+  // Clear user session
+  localStorage.removeItem("user");
+
+  // Redirect to login page
+  window.location.href = "login.html";
+}
+</script>   
+    </ul>
+  </div>  <div class="main">
+    <div class="topbar">
+      <h3>Staff Management</h3>
+      <button class="add-btn" onclick="openModal()">+ Add Staff</button>
+    </div><div class="table">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td>Mr Kassem</td>
+      <td>mrkassem@gmail.com</td>
+      <td>Lecturer</td>
+      <td>Active</td>
+    </tr>
+  </table>
+</div>
+
+  </div></div><div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Add Staff</h3>
+    <input type="text" placeholder="Name">
+    <input type="email" placeholder="Email">
+    <select>
+      <option>Lecturer</option>
+      <option>Admin</option>
+    </select>
+    <input type="password" placeholder="Password">
+    <button onclick="closeModal()">Save</button>
+  </div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('modal').style.display = 'flex';
+}
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+}
+</script></body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | PLASU Attendance Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .login-wrapper{
+            min-height:100vh; display:flex;
+            justify-content:center; align-items:center; padding:20px;
+        }
+        .login-card{
+            width:100%; max-width:460px;
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(12px);
+            border:1px solid rgba(255,255,255,0.18);
+            border-radius:24px; padding:45px 40px; color:white;
+        }
+        .logo-wrap{ text-align:center; margin-bottom:28px; }
+        .logo-wrap img{
+            width:85px; height:85px; border-radius:50%;
+            background:white; padding:8px; object-fit:contain;
+        }
+        .logo-wrap h2{ color:#FFD700; font-size:24px; margin-top:10px; }
+        .logo-wrap p{ color:#ccc; font-size:13px; }
+        .card-title{ font-size:22px; color:#FFD700; margin-bottom:5px; }
+        .card-sub{ color:#ccc; font-size:13px; margin-bottom:25px; }
+        .input-group{ margin-bottom:18px; }
+        .input-group label{ display:block; margin-bottom:7px; font-size:14px; }
+        .input-box{
+            display:flex; align-items:center;
+            background:rgba(255,255,255,0.1);
+            border:1px solid rgba(255,255,255,0.2);
+            border-radius:12px; overflow:hidden;
+        }
+        .input-box i{ padding:14px 15px; color:#FFD700; }
+        .input-box input{
+            flex:1; border:none; outline:none;
+            background:transparent; padding:14px 14px 14px 0;
+            color:white; font-size:15px;
+        }
+        .input-box input::placeholder{ color:rgba(255,255,255,0.45); }
+        .login-btn{
+            width:100%; padding:15px; border:none;
+            border-radius:12px; background:#006B3C;
+            color:white; font-size:16px; font-weight:bold;
+            cursor:pointer; transition:0.3s ease; margin-top:6px;
+        }
+        .login-btn:hover{ background:#004F2C; }
+        .login-btn:disabled{ opacity:0.65; cursor:not-allowed; }
+        .msg-box{
+            font-size:13px; text-align:center;
+            margin-top:14px; padding:12px;
+            border-radius:10px; display:none;
+        }
+        .msg-error  { background:rgba(255,80,80,0.15); border:1px solid rgba(255,80,80,0.4); color:#ff8080; }
+        .msg-success{ background:rgba(0,107,60,0.3);   border:1px solid rgba(0,200,100,0.4); color:#90ee90; }
+        .demo-box{
+            margin-top:20px;
+            background:rgba(255,215,0,0.1);
+            border:1px solid rgba(255,215,0,0.3);
+            border-radius:12px; padding:14px; font-size:13px;
+        }
+        .demo-box strong{ display:block; margin-bottom:6px; color:#FFD700; }
+        .demo-box span{ color:#ddd; }
+        .back-link{
+            display:block; text-align:center; margin-top:20px;
+            color:#FFD700; text-decoration:none; font-size:13px;
+        }
+        .back-link:hover{ text-decoration:underline; }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+
+            <div class="logo-wrap">
+                <img src="assets/images/logo.png" alt="PLASU Logo">
+                <h2>PLASU-AT</h2>
+                <p>Attendance Tracker System</p>
+            </div>
+
+            <h3 class="card-title">Admin Login</h3>
+            <p class="card-sub">Access the administration panel</p>
+
+            <form id="adminLoginForm">
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email"
+                               placeholder="admin@plasu.edu.ng"
+                               value="admin@plasu.edu.ng" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password"
+                               placeholder="Enter password"
+                               value="admin123" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                </button>
+
+                <div class="msg-box" id="msgBox"></div>
+
+            </form>
+
+            <div class="demo-box">
+                <strong>🔑 Demo Credentials</strong>
+                <span>Email: admin@plasu.edu.ng</span><br>
+                <span>Password: admin123</span>
+            </div>
+
+            <a href="Index.html" class="back-link">← Back to Home</a>
+
+        </div>
+    </div>
+
+    <script>
+    /* Clear any stale session first */
+    localStorage.removeItem("adminLoggedIn");
+    localStorage.removeItem("adminData");
+
+    /* ========================= */
+    /* SERVER CHECK ON LOAD      */
+    /* ========================= */
+    window.addEventListener('load', async () => {
+        try{
+            const res = await fetch('../backend/test.php', {method:'GET', cache:'no-cache'});
+            if(!res.ok) throw new Error();
+        }catch(e){
+            const msgBox = document.getElementById('msgBox');
+            msgBox.innerHTML = '⚠️ Cannot reach the server. Make sure XAMPP is running, then visit this page via <strong>http://localhost/</strong>';
+            msgBox.className = 'msg-box';
+            msgBox.style.cssText = 'display:block;background:rgba(255,165,0,0.15);border:1px solid rgba(255,165,0,0.5);color:#FFD700;padding:12px;border-radius:10px;font-size:13px;margin-top:12px;';
+        }
+    });
+
+    document.getElementById("adminLoginForm").addEventListener("submit", async function(e){
+
+        e.preventDefault();
+
+        const email    = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const btn      = document.getElementById("loginBtn");
+        const msgBox   = document.getElementById("msgBox");
+
+        /* Reset */
+        msgBox.style.display = "none";
+        msgBox.className     = "msg-box";
+        btn.disabled         = true;
+        btn.innerHTML        = '<i class="fa-solid fa-spinner fa-spin"></i> Logging in...';
+
+        try{
+
+            const fd = new FormData();
+            fd.append("email",     email);
+            fd.append("password",  password);
+            fd.append("user_type", "admin");
+
+            const res = await fetch("../backend/auth/login.php", {
+                method: "POST",
+                body:   fd
+            });
+
+            /* Read raw text first to catch PHP errors */
+            const rawText = await res.text();
+
+            let data;
+            try{
+                data = JSON.parse(rawText);
+            }catch(parseErr){
+                msgBox.className     = "msg-box msg-error";
+                msgBox.innerHTML     = "❌ Server returned invalid response.<br><small style='word-break:break-all;'>" + rawText.substring(0, 200) + "</small>";
+                msgBox.style.display = "block";
+                return;
+            }
+
+            if(data.status === "success"){
+
+                /* Store session */
+                localStorage.setItem("adminLoggedIn", "true");
+                localStorage.setItem("adminData",     JSON.stringify(data.user));
+
+                /* Confirm it was stored */
+                const check = localStorage.getItem("adminLoggedIn");
+                if(check !== "true"){
+                    msgBox.className     = "msg-box msg-error";
+                    msgBox.textContent   = "❌ Could not save session. Check browser storage settings.";
+                    msgBox.style.display = "block";
+                    return;
+                }
+
+                msgBox.className     = "msg-box msg-success";
+                msgBox.textContent   = "✅ Login successful! Redirecting...";
+                msgBox.style.display = "block";
+
+                /* Small delay so user sees success message */
+                setTimeout(function(){
+                    window.location.href = "admin/admin-dashboard.html";
+                }, 600);
+
+            }else{
+
+                msgBox.className     = "msg-box msg-error";
+                msgBox.textContent   = "❌ " + (data.message || "Invalid credentials");
+                msgBox.style.display = "block";
+
+            }
+
+        }catch(err){
+
+            msgBox.className     = "msg-box msg-error";
+            msgBox.innerHTML     = "❌ Cannot reach server. Is XAMPP running?<br><small>" + err.message + "</small>";
+            msgBox.style.display = "block";
+
+        }finally{
+
+            btn.disabled  = false;
+            btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Login';
+
+        }
+
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        PLASU Lecturer & Student Attendance Tracker
+    </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- OVERLAY -->
+    <div class="overlay"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo-section">
+
+            <img src="assets/images/logo.png"
+                 class="logo">
+
+            <h2>PLASU-AT</h2>
+
+        </div>
+
+        <!-- THEME BUTTON -->
+        <button id="themeToggle">
+
+            🌙
+
+        </button>
+
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Plateau State University,  Lecturer & Student Attendance Tracker
+            </h1>
+
+            <p>
+                Smart lecture attendance, GPS verification,
+                OTP-based check-in and academic monitoring system
+                for Plateau State University.
+            </p>
+
+            <!-- LOGIN CARDS -->
+            <div class="cards">
+
+                <!-- LECTURER -->
+                <div class="card">
+
+                    <i class="fa-solid fa-user-tie"></i>
+
+                    <h3>Lecturer</h3>
+
+                    <p>
+                        Manage lectures, start sessions and track student attendance.
+                    </p>
+
+                    <a href="lecturer/lecturer-login.html">
+
+                        <button>
+                            Login
+                        </button>
+
+                    </a>
+
+                </div>
+
+                <!-- STUDENT -->
+                <div class="card">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                    <h3>Student</h3>
+
+                    <p>
+                        Verify attendance with OTP and track your lecture schedules.
+                    </p>
+
+                    <a href="student/student-login.html">
+                        <button>
+                            Login
+                        </button>
+                    </a>
+
+                </div>
+
+                <!-- ADMIN -->
+                <div class="card">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                    <h3>Admin</h3>
+
+                    <p>
+                        Manage staff, schedules and venues.
+                    </p>
+
+                    <a href="admin-login.html">
+
+                        <button>
+                            Login
+                        </button>
+
+                    </a>
+
+                </div>
+
+                <!-- SCHOOL -->
+                <div class="card">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    <h3>School</h3>
+
+                    <p>
+                        Monitor reports and university analytics.
+                    </p>
+
+                    <a href="school/school-dashboard.html">
+
+                        <button>
+                            View
+                        </button>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- JS -->
+    <script src="js/theme.js"></script>
+
+</body>
+</html>
